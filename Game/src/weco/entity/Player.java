@@ -13,6 +13,7 @@ public class Player {
 	public int hp = 100;
 	public int ammo = 20;
 	public int Maxammo = 100;
+	public int specialAmmo = 0;
 
 	public float x;
 	public float y;
@@ -27,6 +28,8 @@ public class Player {
 	
 	public boolean shouldRotate = false;
 	
+	public String shotType = "";
+	
 	@SuppressWarnings("rawtypes")
 	public ArrayList Shots;
 
@@ -37,7 +40,7 @@ public class Player {
 		y = 450;
 		speed = 0.5F;
 		
-		bounding = new Rectangle((int)x, (int)y, 50, 50);
+		bounding = new Rectangle((int)x, (int)y, size, size);
 	}
 	
 	
@@ -74,7 +77,7 @@ public class Player {
 		}
 
 		bounding.x = (int) x;
-		bounding.y = (int) x;
+		bounding.y = (int) y;
 
 		
 		
@@ -105,12 +108,21 @@ public class Player {
 		return Shots;
 	}
 	
+	
+	
 	@SuppressWarnings("unchecked")
 	public void shot(float x, float y, String dir){
 		if(leftToShoot == 0 && ammo > 0){
+		if(specialAmmo > 0){
+			specialAmmo--;
 			ammo--;
-		Shots.add(new Shot(x, y, 2, dir, "gummi--"));
+		Shots.add(new Shot(x, y, 2, dir, shotType));
 		leftToShoot = shootDelay;
+		}else{
+			ammo--;
+		Shots.add(new Shot(x, y, 2, dir, ""));
+		leftToShoot = shootDelay;
+		}
 		}
 	}
 

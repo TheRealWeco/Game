@@ -20,7 +20,7 @@ public class Frame extends JFrame implements MouseListener{
 	paint zeichnen;
 	Player player;
 	
-	ArrayList<Item> Items = new ArrayList<Item>();
+	public ArrayList<Item> Items = new ArrayList<Item>();
 	
 	public Frame(Player playerInput){
 		super(Main.name + " V." + Main.Version);
@@ -33,7 +33,7 @@ public class Frame extends JFrame implements MouseListener{
 		add(zeichnen);
 		
 		
-		Items.add(new Item("", (int)player.x, (int)player.y, "left--"));
+		Items.add(new Item("gummi--", (int)player.x + 100, (int)player.y + 100, "left--"));
 		
 	}
 	public void repaintScreen(){
@@ -62,8 +62,16 @@ public class Frame extends JFrame implements MouseListener{
 		    gHpBar.fillRect(Main.width - player.ammo * 2 - 10, 6, player.ammo * 2, 20);
 		    gHpBar.setColor(Color.black);
 		    
+		    if(player.specialAmmo > 0){
+			    gHpBar.setColor(Color.orange);
+			    gHpBar.fillRect(Main.width - player.specialAmmo * 2 - 11, 30, player.specialAmmo * 2 + 1, 20 + 1);
+			    gHpBar.setColor(Color.black);
+		    }
+		    
 			for(Item item : Items){
+				if(!item.dead){
 				g.drawRect(item.x, item.y, item.size, item.size);
+				}
 			}
 			
 		    Graphics2D g2d = (Graphics2D)g;

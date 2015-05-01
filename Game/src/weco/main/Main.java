@@ -2,12 +2,14 @@ package weco.main;
 
 import weco.entity.Item;
 import weco.entity.Player;
+import weco.physic.Collisions;
 
 public class Main implements Runnable{
 
 	public static Player player;
 	public static Frame frame;
 	public static Main instance;
+	public static Collisions collision;
 	
 	public static int height = 600;
 	public static int width = 800;
@@ -22,6 +24,8 @@ public class Main implements Runnable{
 	public static void main(String[] args){
 		player = new Player();
 		frame = new Frame(player);
+		collision = new Collisions();
+
 		instance = new Main();
 
 		frame.setLayout(null);
@@ -137,6 +141,9 @@ public class Main implements Runnable{
 
 	}
 	public void longTwoTick(){
+		
+		collision.checkCollisions();
+		
 		if(player.shouldRotate){
 			player.rotation++;
 			if(player.rotation == 360){

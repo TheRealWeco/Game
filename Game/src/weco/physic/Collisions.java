@@ -1,18 +1,17 @@
 package weco.physic;
 
 import java.awt.Rectangle;
-import java.util.ArrayList;
 
-import weco.entity.Shot;
+import weco.entity.Item;
 import weco.main.Main;
 
 public class Collisions {
 
 	@SuppressWarnings({ "unused", "rawtypes" })
 	public void checkCollisions(){
-		Rectangle player = Main.player.getBounding();
+		Rectangle playerBounds = Main.player.getBounding();
 		//Rectangle shoot = Main.player.shot.getBounds();	
-		Rectangle enemy_walk = Main.frame.enemyWalk.getBounds();
+		/**Rectangle enemy_walk = Main.frame.enemyWalk.getBounds();
 		
 		if(Main.frm.enemyWalk.isAlive){
 		ArrayList bullets = Main.player.getShots();
@@ -27,6 +26,15 @@ public class Collisions {
 			
 		}
 		}
+		}*/
+		
+		for(Item item : Main.frame.Items){
+			Rectangle item_bounds = item.getBounds();
+			if(playerBounds.intersects(item_bounds)){
+				item.appendAffect(Main.player);
+				item.dead = true;
+			}
 		}
+		
 		}
 }
