@@ -52,6 +52,9 @@ public class Frame extends JFrame implements MouseListener{
 				g.drawRect((int)m.x, (int)m.y, m.size, m.size);
 			}
 			}
+			
+			if(!player.isDead){
+			
 		    Graphics2D gHpBar = (Graphics2D)g;
 		    gHpBar.drawRect(4, 4, player.hp * 2 + 1, 20 + 1);
 		    gHpBar.setColor(Color.red);
@@ -79,6 +82,7 @@ public class Frame extends JFrame implements MouseListener{
 			transform.rotate(Math.toRadians(player.rotation), (int)player.x + player.size/2, (int)player.y + player.size/2);
 			g2d.transform(transform);
 			g2d.drawRect((int)player.x, (int)player.y, player.size, player.size);
+			}
 		}
 	}
 	public void update() {

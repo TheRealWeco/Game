@@ -5,7 +5,7 @@ import weco.entity.Player;
 import weco.physic.Collisions;
 
 public class Main implements Runnable{
-//tets
+	
 	public static Player player;
 	public static Frame frame;
 	public static Main instance;
@@ -37,7 +37,6 @@ public class Main implements Runnable{
 		instance.start();
 				
 	}
-	
 	
 	
 	
@@ -154,7 +153,7 @@ public class Main implements Runnable{
 		for(Item item : frame.Items){
 			item.updateMove();
 		}
-
+		
 	}
 
 

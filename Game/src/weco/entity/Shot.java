@@ -13,11 +13,14 @@ public class Shot {
 	public int size = 10;
 	
 	public String type;
-	boolean visible = true;
+	public boolean visible = true;
 	String driection = "";
 	boolean revert = false;
 	
 	boolean gummi = false;
+	int bounds = 0;
+	int MaxBounds = 3;
+
 	public Shot(float f, float g, int speed, String dir, String type){
 		this.x = f;
 		this.y = g;
@@ -45,6 +48,8 @@ public class Shot {
 		return new Rectangle((int)x, (int)y, size, size);
 	}
 	public void move(){
+		
+		if(bounds < MaxBounds){
 		
 		if(!revert){
 		if(driection.equalsIgnoreCase("up")){
@@ -95,19 +100,52 @@ public class Shot {
 		}
 			
 		}else{
+			if(driection.equalsIgnoreCase("left")){
 			if(x > Main.width){
+				bounds++;
+				revert = false;
+			}
+			if(x < 0){
+				bounds++;
+				revert = true;
+			}
+			}
+			
+			if(driection.equalsIgnoreCase("right")){
+			if(x > Main.width){
+				bounds++;
 				revert = true;
 			}
 			if(x < 0){
+				bounds++;
 				revert = false;
 			}
+			}
+			if(driection.equalsIgnoreCase("up")){
 			if(y > Main.height){
+				bounds++;
+				revert = false;
+			}
+			if(y < 0){
+				bounds++;
+				revert = true;
+			}
+			}
+			if(driection.equalsIgnoreCase("down")){
+			if(y > Main.height){
+				bounds++;
 				revert = true;
 			}
 			if(y < 0){
+				bounds++;
 				revert = false;
 			}
+			}
+			
+			
 		}
-
+		}else{
+			visible = false;
+		}
 	}
 }

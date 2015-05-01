@@ -27,6 +27,7 @@ public class Player {
 	public int leftToShoot = 0;
 	
 	public boolean shouldRotate = false;
+	public boolean isDead = false;
 	
 	public String shotType = "";
 	
@@ -125,5 +126,4 @@ public class Player {
 		}
 		}
 	}
-
 }
