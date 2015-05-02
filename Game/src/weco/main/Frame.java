@@ -3,6 +3,7 @@ package weco.main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.AffineTransform;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import weco.entity.Crater;
 import weco.entity.Item;
 import weco.entity.Player;
 import weco.entity.Shot;
@@ -21,7 +23,8 @@ public class Frame extends JFrame implements MouseListener{
 	Player player;
 	
 	public ArrayList<Item> Items = new ArrayList<Item>();
-	
+	public ArrayList<Crater> Craters = new ArrayList<Crater>();
+
 	public Frame(Player playerInput){
 		super(Main.name + " V." + Main.Version);
 		player = playerInput;
@@ -43,6 +46,8 @@ public class Frame extends JFrame implements MouseListener{
 		@Override
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
+			
+			
 			@SuppressWarnings("rawtypes")
 			ArrayList bullets = player.getShots();
 			if(bullets != null && !(bullets.size() == 0)){
@@ -51,6 +56,21 @@ public class Frame extends JFrame implements MouseListener{
 				//g.drawImage(m.bulletImg, m.x, m.y, null);
 				g.drawRect((int)m.x, (int)m.y, m.size, m.size);
 			}
+			}
+			
+			
+			if(player.isDead){
+				g.drawString("YOU DIED", Main.width/2, Main.height/2);
+				g.drawString("Press \"R\" to restart", Main.width/2, Main.height/2 + 30);
+			}
+			
+			if(player.playDieAnimation){
+				Craters.add(new Crater((int)player.x, (int)player.y));
+				player.playDieAnimation = false;
+			}
+			
+			for(Crater crater : Craters){
+				g.drawImage(Main.images.getCrater(), crater.x, crater.y, null);
 			}
 			
 			if(!player.isDead){
@@ -82,11 +102,19 @@ public class Frame extends JFrame implements MouseListener{
 			transform.rotate(Math.toRadians(player.rotation), (int)player.x + player.size/2, (int)player.y + player.size/2);
 			g2d.transform(transform);
 			g2d.drawRect((int)player.x, (int)player.y, player.size, player.size);
+			
+			
+			
 			}
+			
 		}
 	}
 	public void update() {
-		
+		if(player.isDead){
+			if(keyCheck.keysCheck(KeyEvent.VK_R)){
+				Main.player.reset();
+			}
+		}
 	}
 	public void init() {
 		

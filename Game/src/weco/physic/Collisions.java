@@ -7,7 +7,6 @@ import weco.main.Main;
 
 public class Collisions {
 
-	@SuppressWarnings({ "unused", "rawtypes" })
 	public void checkCollisions(){
 		Rectangle playerBounds = Main.player.getBounding();
 		//Rectangle shoot = Main.player.shot.getBounds();	

@@ -2,6 +2,8 @@ package weco.main;
 
 import weco.entity.Item;
 import weco.entity.Player;
+import weco.fileManager.Audio;
+import weco.fileManager.Images;
 import weco.physic.Collisions;
 
 public class Main implements Runnable{
@@ -10,7 +12,9 @@ public class Main implements Runnable{
 	public static Frame frame;
 	public static Main instance;
 	public static Collisions collision;
-	
+	public static Images images;
+	public static Audio audio;
+
 	public static int height = 600;
 	public static int width = 800;
 	public static String name = "Game";
@@ -25,7 +29,9 @@ public class Main implements Runnable{
 		player = new Player();
 		frame = new Frame(player);
 		collision = new Collisions();
-
+		images = new Images();
+		audio = new Audio();
+		
 		instance = new Main();
 
 		frame.setLayout(null);
@@ -35,7 +41,8 @@ public class Main implements Runnable{
 		frame.setResizable(false);
 		
 		instance.start();
-				
+		player.kill();
+
 	}
 	
 	
@@ -123,7 +130,6 @@ public class Main implements Runnable{
 	}
 	
 	public void longThousandUpdate(){	
-
 	}
 	
 	public void longHundredTick(){
@@ -140,6 +146,7 @@ public class Main implements Runnable{
 
 	}
 	public void longTwoTick(){
+		
 		
 		collision.checkCollisions();
 		

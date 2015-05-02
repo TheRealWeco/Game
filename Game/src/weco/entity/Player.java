@@ -17,6 +17,8 @@ public class Player {
 
 	public float x;
 	public float y;
+	public float Defx;
+	public float Defy;
 	public float speed;
 	public int size = 50;
 	public int rotation = 0;
@@ -28,6 +30,7 @@ public class Player {
 	
 	public boolean shouldRotate = false;
 	public boolean isDead = false;
+	public boolean playDieAnimation = false;
 	
 	public String shotType = "";
 	
@@ -39,6 +42,8 @@ public class Player {
 
 		x = 200;
 		y = 450;
+		Defx = x;
+		Defy = y;
 		speed = 0.5F;
 		
 		bounding = new Rectangle((int)x, (int)y, size, size);
@@ -47,6 +52,9 @@ public class Player {
 	
 	@SuppressWarnings({ "rawtypes", "null" })
 	public void update(){
+		
+		if(!isDead){
+		
 		if(keyCheck.keysCheck(KeyEvent.VK_R)){
 			shouldRotate = true;
 		}
@@ -80,7 +88,7 @@ public class Player {
 		bounding.x = (int) x;
 		bounding.y = (int) y;
 
-		
+		}
 		
 		
 		
@@ -110,9 +118,16 @@ public class Player {
 	}
 	
 	
+	public void kill(){
+		isDead = true;
+		playDieAnimation = true;
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public void shot(float x, float y, String dir){
+		if(!isDead){
+		
 		if(leftToShoot == 0 && ammo > 0){
 		if(specialAmmo > 0){
 			specialAmmo--;
@@ -125,5 +140,25 @@ public class Player {
 		leftToShoot = shootDelay;
 		}
 		}
+		}
+	}
+
+
+	public void reset() {
+		
+		hp = 100;
+		ammo = 20;
+		Maxammo = 100;
+		specialAmmo = 0;
+		x = Defx;
+		y = Defy;
+		size = 50;
+		rotation = 0;
+		shotSize = 10;
+		shootDelay = 10;
+		shouldRotate = false;
+		isDead = false;
+		playDieAnimation = false;
+		
 	}
 }
