@@ -4,6 +4,7 @@ import weco.entity.Item;
 import weco.entity.Player;
 import weco.fileManager.Audio;
 import weco.fileManager.Images;
+import weco.methodes.Methodes;
 import weco.physic.Collisions;
 
 public class Main implements Runnable{
@@ -14,7 +15,8 @@ public class Main implements Runnable{
 	public static Collisions collision;
 	public static Images images;
 	public static Audio audio;
-
+	public static Methodes methodes;
+	
 	public static int height = 600;
 	public static int width = 800;
 	public static String name = "Game";
@@ -31,6 +33,7 @@ public class Main implements Runnable{
 		collision = new Collisions();
 		images = new Images();
 		audio = new Audio();
+		methodes = new Methodes();
 		
 		instance = new Main();
 
@@ -140,7 +143,6 @@ public class Main implements Runnable{
 	}
 	
 	public void longTenTick(){
-		
 
 	}
 	public void longTwoTick(){

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import weco.entity.Asteroid;
 import weco.entity.Crater;
 import weco.entity.Item;
 import weco.entity.Player;
@@ -24,6 +25,9 @@ public class Frame extends JFrame implements MouseListener{
 	
 	public ArrayList<Item> Items = new ArrayList<Item>();
 	public ArrayList<Crater> Craters = new ArrayList<Crater>();
+	public ArrayList<Asteroid> Asteroids = new ArrayList<Asteroid>();
+	
+	ArrayList<Asteroid> AsteroidsOld = new ArrayList<Asteroid>();
 
 	public Frame(Player playerInput){
 		super(Main.name + " V." + Main.Version);
@@ -97,12 +101,24 @@ public class Frame extends JFrame implements MouseListener{
 				}
 			}
 			
+			for(Asteroid asteroid : Asteroids){
+				if(!asteroid.isDead){
+					asteroid.update();
+				Graphics2D g2d = (Graphics2D)g.create();
+				AffineTransform transform = new AffineTransform();
+				transform.rotate(Math.toRadians(asteroid.rotation), (int) asteroid.x, (int) asteroid.y);
+				g2d.transform(transform);
+				g2d.drawImage(asteroid.image, (int) asteroid.x, (int) asteroid.y, null);
+				g2d.dispose();
+				}
+				
+			}
+			
 		    Graphics2D g2d = (Graphics2D)g;
 			AffineTransform transform = new AffineTransform();
 			transform.rotate(Math.toRadians(player.rotation), (int)player.x + player.size/2, (int)player.y + player.size/2);
 			g2d.transform(transform);
 			g2d.drawRect((int)player.x, (int)player.y, player.size, player.size);
-			
 			
 			
 			}
@@ -111,6 +127,8 @@ public class Frame extends JFrame implements MouseListener{
 	}
 	public void update() {
 		player.update();
+				
+		
 		if(player.isDead){
 			if(keyCheck.keysCheck(KeyEvent.VK_R)){
 				Main.player.reset();
@@ -119,11 +137,16 @@ public class Frame extends JFrame implements MouseListener{
 			if(keyCheck.keysCheck(KeyEvent.VK_W)){
 				for(Crater crater : Craters){
 					crater.y = crater.y + player.speed;
+					onMove();
 				}
 				
 				for(Item item : Items){
 					item.y = item.y + player.speed;
 				}
+				for(Asteroid asteroid : Asteroids){
+					asteroid.y = asteroid.y + player.speed;
+				}
+				onMove();
 			}
 			if(keyCheck.keysCheck(KeyEvent.VK_A)){
 				for(Crater crater : Craters){
@@ -132,6 +155,10 @@ public class Frame extends JFrame implements MouseListener{
 				for(Item item : Items){
 					item.x = item.x + player.speed;
 				}
+				for(Asteroid asteroid : Asteroids){
+					asteroid.x = asteroid.x + player.speed;
+				}
+				onMove();
 			}
 			if(keyCheck.keysCheck(KeyEvent.VK_S)){
 				for(Crater crater : Craters){
@@ -140,6 +167,11 @@ public class Frame extends JFrame implements MouseListener{
 				for(Item item : Items){
 					item.y = item.y - player.speed;
 				}
+				for(Asteroid asteroid : Asteroids){
+					asteroid.y = asteroid.y - player.speed;
+				}
+				onMove();
+				
 			}
 			if(keyCheck.keysCheck(KeyEvent.VK_D)){
 				for(Crater crater : Craters){
@@ -148,12 +180,23 @@ public class Frame extends JFrame implements MouseListener{
 				for(Item item : Items){
 					item.x = item.x - player.speed;
 				}
+				for(Asteroid asteroid : Asteroids){
+					asteroid.x = asteroid.x - player.speed;
+				}
+				onMove();
 			}
 		}
 	}
 	public void init() {
 		
 	}
+	
+	public void onMove(){
+		if(Main.methodes.randInt(0, 5000) == 1){
+			Asteroids.add(new Asteroid(Main.methodes.randInt(0, Main.width), Main.methodes.randInt(0, 0), 0, null, 200, Main.methodes.randInt(0, 9), Main.methodes.randInt(0, 360)));
+		}
+	}
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == MouseEvent.BUTTON1){
