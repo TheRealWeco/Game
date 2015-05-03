@@ -41,7 +41,6 @@ public class Main implements Runnable{
 		frame.setResizable(false);
 		
 		instance.start();
-		player.kill();
 
 	}
 	
@@ -94,7 +93,6 @@ public class Main implements Runnable{
 			
 			frame.repaintScreen();
 			frame.update();
-			player.update();
 			longTwoTick();
 			}
 			

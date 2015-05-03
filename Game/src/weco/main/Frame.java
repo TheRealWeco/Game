@@ -70,7 +70,7 @@ public class Frame extends JFrame implements MouseListener{
 			}
 			
 			for(Crater crater : Craters){
-				g.drawImage(Main.images.getCrater(), crater.x, crater.y, null);
+				g.drawImage(Main.images.getCrater(), (int)crater.x, (int)crater.y, null);
 			}
 			
 			if(!player.isDead){
@@ -93,7 +93,7 @@ public class Frame extends JFrame implements MouseListener{
 		    
 			for(Item item : Items){
 				if(!item.dead){
-				g.drawRect(item.x, item.y, item.size, item.size);
+				g.drawRect((int)item.x, (int)item.y, item.size, item.size);
 				}
 			}
 			
@@ -110,9 +110,44 @@ public class Frame extends JFrame implements MouseListener{
 		}
 	}
 	public void update() {
+		player.update();
 		if(player.isDead){
 			if(keyCheck.keysCheck(KeyEvent.VK_R)){
 				Main.player.reset();
+			}
+		}else{
+			if(keyCheck.keysCheck(KeyEvent.VK_W)){
+				for(Crater crater : Craters){
+					crater.y = crater.y + player.speed;
+				}
+				
+				for(Item item : Items){
+					item.y = item.y + player.speed;
+				}
+			}
+			if(keyCheck.keysCheck(KeyEvent.VK_A)){
+				for(Crater crater : Craters){
+					crater.x = crater.x + player.speed;
+				}
+				for(Item item : Items){
+					item.x = item.x + player.speed;
+				}
+			}
+			if(keyCheck.keysCheck(KeyEvent.VK_S)){
+				for(Crater crater : Craters){
+					crater.y = crater.y - player.speed;
+				}
+				for(Item item : Items){
+					item.y = item.y - player.speed;
+				}
+			}
+			if(keyCheck.keysCheck(KeyEvent.VK_D)){
+				for(Crater crater : Craters){
+					crater.x = crater.x - player.speed;
+				}
+				for(Item item : Items){
+					item.x = item.x - player.speed;
+				}
 			}
 		}
 	}

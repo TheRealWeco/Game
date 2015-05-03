@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+import weco.main.Main;
 import weco.main.keyCheck;
 
 public class Player {
@@ -40,8 +41,8 @@ public class Player {
 	public Player(){
 		Shots = new ArrayList<>();
 
-		x = 200;
-		y = 450;
+		x = Main.width/2 - size/2;
+		y = Main.height/2 - size/2;
 		Defx = x;
 		Defy = y;
 		speed = 0.5F;
@@ -55,7 +56,7 @@ public class Player {
 		
 		if(!isDead){
 		
-		if(keyCheck.keysCheck(KeyEvent.VK_R)){
+		/*if(keyCheck.keysCheck(KeyEvent.VK_R)){
 			shouldRotate = true;
 		}
 		if(keyCheck.keysCheck(KeyEvent.VK_A)){
@@ -71,7 +72,7 @@ public class Player {
 			y += speed;
 			
 			
-		}
+		}*/
 		if(keyCheck.keysCheck(KeyEvent.VK_UP)){
 			shot(x + size / 2 - shotSize/2, y + size/2 - shotSize, "up");
 		}

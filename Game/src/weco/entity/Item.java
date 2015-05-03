@@ -7,8 +7,8 @@ import weco.main.Main;
 public class Item {
 	
 	public String type;
-	public int x;
-	public int y;
+	public float x;
+	public float y;
 	public String moveDir;
 	public int speed = 1;
 	public int size = 20;

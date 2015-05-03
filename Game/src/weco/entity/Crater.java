@@ -2,8 +2,8 @@ package weco.entity;
 
 public class Crater {
 	
-	public int x;
-	public int y;
+	public float x;
+	public float y;
 	
 	public Crater(int x, int y){
 		this.x = x;
