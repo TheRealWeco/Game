@@ -114,12 +114,17 @@ public class Frame extends JFrame implements MouseListener{
 				
 			}
 			
-		    Graphics2D g2d = (Graphics2D)g;
+		    /*Graphics2D g2d = (Graphics2D)g;
 			AffineTransform transform = new AffineTransform();
 			transform.rotate(Math.toRadians(player.rotation), (int)player.x + player.size/2, (int)player.y + player.size/2);
 			g2d.transform(transform);
-			g2d.drawRect((int)player.x, (int)player.y, player.size, player.size);
-			
+			g2d.drawRect((int)player.x, (int)player.y, player.size, player.size);*/
+			Graphics2D g2d = (Graphics2D)g.create();
+			AffineTransform transform = new AffineTransform();
+			transform.rotate(Math.toRadians(player.rotation), (int) player.x, (int) player.y);
+			g2d.transform(transform);
+			g2d.drawImage(player.image, (int) player.x, (int) player.y, null);
+			g2d.dispose();
 			
 			}
 			

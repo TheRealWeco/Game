@@ -2,6 +2,7 @@ package weco.entity;
 
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import weco.main.Main;
@@ -38,14 +39,25 @@ public class Player {
 	@SuppressWarnings("rawtypes")
 	public ArrayList Shots;
 
-	public Player(){
-		Shots = new ArrayList<>();
+	public BufferedImage image;
 
+	public Spaceship spaceship;
+	
+	public Player(Spaceship spaceship){
+		Shots = new ArrayList<>();
+		
+		this.spaceship = spaceship;
+		this.size = spaceship.size;
+		this.hp = spaceship.hp;
+		this.image = spaceship.image;
+		this.ammo = spaceship.ammoOnBuy;
+		this.Maxammo = spaceship.maxAmmo;
+		this.speed = spaceship.speed;
+		
 		x = Main.width/2 - size/2;
 		y = Main.height/2 - size/2;
 		Defx = x;
 		Defy = y;
-		speed = 0.5F;
 		
 		bounding = new Rectangle((int)x, (int)y, size, size);
 	}
