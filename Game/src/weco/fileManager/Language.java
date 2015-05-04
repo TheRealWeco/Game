@@ -2,6 +2,8 @@ package weco.fileManager;
 
 import java.util.HashMap;
 
+import weco.data.LanguageType;
+
 public class Language {
 
 	public static HashMap<LanguageType, String> string = new HashMap<LanguageType, String>();

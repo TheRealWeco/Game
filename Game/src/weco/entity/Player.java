@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import weco.data.Size;
 import weco.main.Main;
 import weco.main.keyCheck;
 
@@ -22,7 +23,8 @@ public class Player {
 	public float Defx;
 	public float Defy;
 	public float speed;
-	public int size = 50;
+	public Size size;
+	private Size oldSize;
 	public int rotation = 0;
 	
 	public int shotSize = 10;
@@ -54,12 +56,13 @@ public class Player {
 		this.Maxammo = spaceship.maxAmmo;
 		this.speed = spaceship.speed;
 		
-		x = Main.width/2 - size/2;
-		y = Main.height/2 - size/2;
+		x = Main.width/2 - size.x/2;
+		y = Main.height/2 - size.y/2;
 		Defx = x;
 		Defy = y;
+		oldSize = size;
 		
-		bounding = new Rectangle((int)x, (int)y, size, size);
+		bounding = new Rectangle((int)x, (int)y, size.x, size.y);
 	}
 	
 	
@@ -86,16 +89,16 @@ public class Player {
 			
 		}*/
 		if(keyCheck.keysCheck(KeyEvent.VK_UP)){
-			shot(x + size / 2 - shotSize/2, y + size/2 - shotSize, "up");
+			shot(x + size.x / 2 - shotSize/2, y + size.y/2 - shotSize, "up");
 		}
 		if(keyCheck.keysCheck(KeyEvent.VK_DOWN)){
-			shot(x + size / 2 - shotSize/2, y + size/2, "down");
+			shot(x + size.x / 2 - shotSize/2, y + size.y/2, "down");
 		}
 		if(keyCheck.keysCheck(KeyEvent.VK_LEFT)){
-			shot(x + size / 2 - shotSize, y + size/2 - shotSize/2, "left");
+			shot(x + size.x / 2 - shotSize, y + size.y/2 - shotSize/2, "left");
 		}
 		if(keyCheck.keysCheck(KeyEvent.VK_RIGHT)){
-			shot(x + size / 2 - shotSize/2, y + size/2 - shotSize/2, "right");
+			shot(x + size.x / 2 - shotSize/2, y + size.y/2 - shotSize/2, "right");
 		}
 
 		bounding.x = (int) x;
@@ -165,7 +168,7 @@ public class Player {
 		specialAmmo = 0;
 		x = Defx;
 		y = Defy;
-		size = 50;
+		size = oldSize;
 		rotation = 0;
 		shotSize = 10;
 		shootDelay = 10;

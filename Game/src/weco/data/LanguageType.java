@@ -1,4 +1,4 @@
-package weco.fileManager;
+package weco.data;
 
 public class LanguageType {
 

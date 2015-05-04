@@ -2,13 +2,14 @@ package weco.main;
 
 import java.util.HashMap;
 
+import weco.data.LanguageType;
+import weco.data.Size;
 import weco.entity.Item;
 import weco.entity.Player;
 import weco.entity.Spaceship;
 import weco.fileManager.Audio;
 import weco.fileManager.Images;
 import weco.fileManager.Language;
-import weco.fileManager.LanguageType;
 import weco.methodes.Methodes;
 import weco.physic.Collisions;
 
@@ -39,7 +40,9 @@ public class Main implements Runnable{
 	public static void main(String[] args){
 		images = new Images();
 		audio = new Audio();
-		Spaceships.put(0, new Spaceship(100, 100, 20, Language.string.get(new LanguageType(Main.currentLang, "ship0")), 0, 5, images.getSpriteSheet().getSubimage(0, 100, 100, 100), 0.75F, 100));
+		
+		Spaceships.put(0, new Spaceship(100, 100, 20, Language.string.get(new LanguageType(Main.currentLang, "ship0")), 0, 5, 
+				images.getSpriteSheet().getSubimage(0, 100, 100, 100), 0.75F, new Size(100, 100)));
 		
 		player = new Player(Spaceships.get(0));
 		frame = new Frame(player);

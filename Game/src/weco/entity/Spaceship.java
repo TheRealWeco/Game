@@ -2,6 +2,8 @@ package weco.entity;
 
 import java.awt.image.BufferedImage;
 
+import weco.data.Size;
+
 public class Spaceship {
 
 	public int hp;
@@ -12,9 +14,9 @@ public class Spaceship {
 	public int invSlots;
 	public BufferedImage image;
 	public float speed;
-	public int size;
+	public Size size;
 	
-	public Spaceship(int hp, int maxAmmo, int ammoOnBuy, String name, int type, int invSlots, BufferedImage image, float speed, int size){
+	public Spaceship(int hp, int maxAmmo, int ammoOnBuy, String name, int type, int invSlots, BufferedImage image, float speed, Size size){
 		this.hp = hp;
 		this.maxAmmo = maxAmmo;
 		this.ammoOnBuy = ammoOnBuy;
