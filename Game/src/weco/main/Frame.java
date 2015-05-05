@@ -1,6 +1,7 @@
 package weco.main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -28,7 +29,7 @@ public class Frame extends JFrame implements MouseListener{
 	public ArrayList<Asteroid> Asteroids = new ArrayList<Asteroid>();
 	
 	ArrayList<Asteroid> AsteroidsOld = new ArrayList<Asteroid>();
-
+		
 	public Frame(Player playerInput){
 		super(Main.name + " V." + Main.Version);
 		player = playerInput;
@@ -79,8 +80,14 @@ public class Frame extends JFrame implements MouseListener{
 			
 			if(!player.isDead){
 			
-		    Graphics2D gHpBar = (Graphics2D)g;
-		    gHpBar.drawRect(4, 4, player.hp * 2 + 1, 20 + 1);
+			Graphics2D g2g = (Graphics2D)g.create();
+			g2g.setColor(Color.green);
+			g2g.setFont(new Font(getFont().getName(), 0, 25));
+		    g2g.drawString("HP: " + player.hp + "/" + player.spaceship.hp, 5, 25);
+		    g2g.drawString("Ammo: " + player.ammo + "/" + player.Maxammo, 5, 25 + 30);
+		    g2g.drawString("Special Uses left: " + player.specialAmmo, 5, 25 + 30 + 30);
+		    g2g.dispose();
+		    /*gHpBar.drawRect(4, 4, player.hp * 2 + 1, 20 + 1);
 		    gHpBar.setColor(Color.red);
 		    gHpBar.fillRect(5, 5, player.hp * 2, 20);
 		    gHpBar.setColor(Color.black);
@@ -90,11 +97,11 @@ public class Frame extends JFrame implements MouseListener{
 		    gHpBar.setColor(Color.black);
 		    
 		    if(player.specialAmmo > 0){
-			    gHpBar.setColor(Color.orange);
-			    gHpBar.fillRect(Main.width - player.specialAmmo * 2 - 11, 30, player.specialAmmo * 2 + 1, 20 + 1);
-			    gHpBar.setColor(Color.black);
+			    g.setColor(Color.orange);
+			    g.fillRect(Main.width - player.specialAmmo * 2 - 11, 30, player.specialAmmo * 2 + 1, 20 + 1);
+			    g.setColor(Color.black);
 		    }
-		    
+		    */
 			for(Item item : Items){
 				if(!item.dead){
 				g.drawRect((int)item.x, (int)item.y, item.size, item.size);
@@ -121,7 +128,7 @@ public class Frame extends JFrame implements MouseListener{
 			g2d.drawRect((int)player.x, (int)player.y, player.size, player.size);*/
 			Graphics2D g2d = (Graphics2D)g.create();
 			AffineTransform transform = new AffineTransform();
-			transform.rotate(Math.toRadians(player.rotation), (int) player.x, (int) player.y);
+			transform.rotate(Math.toRadians(player.rotation), (int) player.x + player.size.x/2, (int) player.y + player.size.y/2);
 			g2d.transform(transform);
 			g2d.drawImage(player.image, (int) player.x, (int) player.y, null);
 			g2d.dispose();
@@ -139,6 +146,24 @@ public class Frame extends JFrame implements MouseListener{
 				Main.player.reset();
 			}
 		}else{
+			
+			if(keyCheck.keysCheck(KeyEvent.VK_UP)){
+				player.shouldRotate = true;
+				player.rotateDir = player.rotateDir = "up";
+			}
+			if(keyCheck.keysCheck(KeyEvent.VK_DOWN)){
+				player.shouldRotate = true;
+				player.rotateDir = player.rotateDir = "down";
+			}
+			if(keyCheck.keysCheck(KeyEvent.VK_LEFT)){
+				player.shouldRotate = true;
+				player.rotateDir = player.rotateDir = "left";
+			}
+			if(keyCheck.keysCheck(KeyEvent.VK_RIGHT)){
+				player.shouldRotate = true;
+				player.rotateDir = player.rotateDir = "right";
+			}
+
 			if(keyCheck.keysCheck(KeyEvent.VK_W)){
 				for(Crater crater : Craters){
 					crater.y = crater.y + player.speed;

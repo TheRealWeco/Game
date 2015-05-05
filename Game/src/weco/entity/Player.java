@@ -45,6 +45,8 @@ public class Player {
 
 	public Spaceship spaceship;
 	
+	public String rotateDir = "up";
+	
 	public Player(Spaceship spaceship){
 		Shots = new ArrayList<>();
 		
@@ -88,7 +90,8 @@ public class Player {
 			
 			
 		}*/
-		if(keyCheck.keysCheck(KeyEvent.VK_UP)){
+			
+		/*if(keyCheck.keysCheck(KeyEvent.VK_UP)){
 			shot(x + size.x / 2 - shotSize/2, y + size.y/2 - shotSize, "up");
 		}
 		if(keyCheck.keysCheck(KeyEvent.VK_DOWN)){
@@ -99,7 +102,11 @@ public class Player {
 		}
 		if(keyCheck.keysCheck(KeyEvent.VK_RIGHT)){
 			shot(x + size.x / 2 - shotSize/2, y + size.y/2 - shotSize/2, "right");
-		}
+		}*/
+			
+	    if(keyCheck.keysCheck(KeyEvent.VK_SPACE)){
+			shot(x + size.x / 2 - shotSize/2, y + size.y/2 - shotSize/2, rotateDir);
+	    }
 
 		bounding.x = (int) x;
 		bounding.y = (int) y;

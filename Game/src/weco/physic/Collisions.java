@@ -29,11 +29,13 @@ public class Collisions {
 		}*/
 		
 		for(Item item : Main.frame.Items){
+			if(!item.dead){
 			Rectangle item_bounds = item.getBounds();
 			if(playerBounds.intersects(item_bounds)){
 				item.appendAffect(Main.player);
 				item.dead = true;
 			}
+		}
 		}
 		
 		}

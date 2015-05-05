@@ -44,7 +44,13 @@ public class Main implements Runnable{
 		Spaceships.put(0, new Spaceship(100, 100, 20, Language.string.get(new LanguageType(Main.currentLang, "ship0")), 0, 5, 
 				images.getSpriteSheet().getSubimage(0, 100, 100, 100), 0.75F, new Size(100, 100)));
 		
-		player = new Player(Spaceships.get(0));
+		Spaceships.put(1, new Spaceship(100, 50, 10, Language.string.get(new LanguageType(Main.currentLang, "ship1")), 1, 4, 
+				images.getSpriteSheet().getSubimage(100, 100, 50, 100), 1.0F, new Size(50, 100)));
+
+		Spaceships.put(2, new Spaceship(250, 250, 100, Language.string.get(new LanguageType(Main.currentLang, "ship2")), 2, 2, 
+				images.getSpriteSheet().getSubimage(200, 100, 100, 100), 0.50F, new Size(100, 100)));
+
+		player = new Player(Spaceships.get(2));
 		frame = new Frame(player);
 		collision = new Collisions();
 		methodes = new Methodes();
@@ -164,13 +170,65 @@ public class Main implements Runnable{
 		
 		
 		collision.checkCollisions();
-		
 		if(player.shouldRotate){
-			player.rotation++;
-			if(player.rotation == 360){
-				player.shouldRotate = false;
-				player.rotation = 0;
+			
+			if(player.rotateDir.equals("up")){	
+				int toRotate = 0;
+				
+				if(player.rotation == toRotate){
+					player.shouldRotate = false;
+				}
+				
+				if(player.rotation < toRotate){
+				player.rotation++;
+				}
+				if(player.rotation > toRotate){
+				player.rotation--;
+				}
 			}
+			if(player.rotateDir.equals("right")){	
+				int toRotate = 90;
+				
+				if(player.rotation == toRotate){
+					player.shouldRotate = false;
+				}
+				
+				if(player.rotation < toRotate){
+				player.rotation++;
+				}
+				if(player.rotation > toRotate){
+				player.rotation--;
+				}
+			}
+			if(player.rotateDir.equals("left")){	
+				int toRotate = -90;
+				
+				if(player.rotation == toRotate){
+					player.shouldRotate = false;
+				}
+				
+				if(player.rotation < toRotate){
+				player.rotation++;
+				}
+				if(player.rotation > toRotate){
+				player.rotation--;
+				}
+			}
+			if(player.rotateDir.equals("down")){	
+				int toRotate = 180;
+				
+				if(player.rotation == toRotate){
+					player.shouldRotate = false;
+				}
+				
+				if(player.rotation < toRotate){
+				player.rotation++;
+				}
+				if(player.rotation > toRotate){
+				player.rotation--;
+				}
+			}
+			
 		}
 		for(Item item : frame.Items){
 			item.updateMove();
