@@ -30,6 +30,8 @@ public class Frame extends JFrame implements MouseListener{
 	
 	ArrayList<Asteroid> AsteroidsOld = new ArrayList<Asteroid>();
 		
+	boolean hitbox = true;
+	
 	public Frame(Player playerInput){
 		super(Main.name + " V." + Main.Version);
 		player = playerInput;
@@ -108,15 +110,21 @@ public class Frame extends JFrame implements MouseListener{
 				}
 			}
 			
-			for(Asteroid asteroid : Asteroids){
+			for(int i = 0; i < Main.frame.Asteroids.size(); i++){
+				Asteroid asteroid = Main.frame.Asteroids.get(i);
+				asteroid.update();
 				if(!asteroid.isDead){
-					asteroid.update();
 				Graphics2D g2d = (Graphics2D)g.create();
 				AffineTransform transform = new AffineTransform();
 				transform.rotate(Math.toRadians(asteroid.rotation), (int) asteroid.x, (int) asteroid.y);
 				g2d.transform(transform);
 				g2d.drawImage(asteroid.image, (int) asteroid.x, (int) asteroid.y, null);
+				if(hitbox){
+					g2d.drawRect((int) asteroid.getBounding().x, (int) asteroid.getBounding().y, asteroid.getBounding().width, asteroid.getBounding().height);
+				}
 				g2d.dispose();
+				}else{
+					Asteroids.remove(i);
 				}
 				
 			}
@@ -131,6 +139,10 @@ public class Frame extends JFrame implements MouseListener{
 			transform.rotate(Math.toRadians(player.rotation), (int) player.x + player.size.x/2, (int) player.y + player.size.y/2);
 			g2d.transform(transform);
 			g2d.drawImage(player.image, (int) player.x, (int) player.y, null);
+			
+			if(hitbox){
+			g2d.drawRect((int)player.getBounding().x, (int)player.getBounding().y, player.getBounding().width, player.getBounding().height);
+			}
 			g2d.dispose();
 			
 			}
@@ -222,7 +234,7 @@ public class Frame extends JFrame implements MouseListener{
 	}
 	
 	public void onMove(){
-		if(Main.methodes.randInt(0, 5000) == 1){
+		if(Main.methodes.randInt(0, 0100) == 1){
 			Asteroids.add(new Asteroid(Main.methodes.randInt(0, Main.width), Main.methodes.randInt(0, 0), 0, null, 200, Main.methodes.randInt(0, 9), Main.methodes.randInt(0, 360)));
 		}
 	}

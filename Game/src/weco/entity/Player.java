@@ -64,7 +64,7 @@ public class Player {
 		Defy = y;
 		oldSize = size;
 		
-		bounding = new Rectangle((int)x, (int)y, size.x, size.y);
+		bounding = new Rectangle((int)x, (int)y, image.getWidth(), image.getHeight());
 	}
 	
 	
@@ -130,6 +130,10 @@ public class Player {
 		}
 
 
+	}
+	
+	public void damage(int damage){
+		hp = hp - damage;
 	}
 	
 	public Rectangle getBounding(){

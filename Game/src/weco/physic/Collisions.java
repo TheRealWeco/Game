@@ -3,11 +3,15 @@ package weco.physic;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import weco.entity.Asteroid;
 import weco.entity.Item;
+import weco.entity.Player;
 import weco.main.Main;
 
 public class Collisions {
 
+	Player player = Main.player;
+	
 	public void checkCollisions(){
 		Rectangle playerBounds = Main.player.getBounding();
 		//Rectangle shoot = Main.player.shot.getBounds();	
@@ -27,6 +31,38 @@ public class Collisions {
 		}
 		}
 		}*/
+		/*for(Asteroid asteroid : Main.frame.Asteroids){
+			if(!asteroid.isDead){
+				if(playerBounds.intersects(asteroid.getBounding())){
+					
+					
+					System.out.println("coll");
+					
+					asteroid.hp = 0;
+					
+					
+					player.damage(asteroid.hp/2);
+				}
+				
+				
+			}
+		}*/
+		
+		for(int i = 0; i < Main.frame.Asteroids.size(); i++){
+			Asteroid asteroid = Main.frame.Asteroids.get(i);
+			if(!asteroid.isDead){
+				if(playerBounds.intersects(asteroid.getBounding())){
+					
+					
+					System.out.println("coll");
+					
+					asteroid.hp = 0;
+					
+					player.damage(asteroid.hp/2);
+				}
+			}
+		}
+		
 		
 		for(Item item : Main.frame.Items){
 			if(!item.dead){
