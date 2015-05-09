@@ -49,8 +49,11 @@ public class Main implements Runnable{
 
 		Spaceships.put(2, new Spaceship(250, 250, 100, Language.string.get(new LanguageType(Main.currentLang, "ship2")), 2, 2, 
 				images.getSpriteSheet().getSubimage(200, 100, 100, 100), 0.50F, new Size(100, 100)));
+		
+		Spaceships.put(3, new Spaceship(250, 250, 100, Language.string.get(new LanguageType(Main.currentLang, "ship3")), 2, 2, 
+				images.getImage("smiley"), 0.50F, new Size(100, 100)));
 
-		player = new Player(Spaceships.get(2));
+		player = new Player(Spaceships.get(0));
 		frame = new Frame(player);
 		collision = new Collisions();
 		methodes = new Methodes();
@@ -147,7 +150,6 @@ public class Main implements Runnable{
 			}
 			
 			TenTick++;
-
 		}
 	}
 	

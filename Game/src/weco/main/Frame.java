@@ -30,7 +30,7 @@ public class Frame extends JFrame implements MouseListener{
 	
 	ArrayList<Asteroid> AsteroidsOld = new ArrayList<Asteroid>();
 		
-	boolean hitbox = true;
+	boolean hitbox = false;
 	
 	public Frame(Player playerInput){
 		super(Main.name + " V." + Main.Version);
@@ -234,7 +234,7 @@ public class Frame extends JFrame implements MouseListener{
 	}
 	
 	public void onMove(){
-		if(Main.methodes.randInt(0, 0100) == 1){
+		if(Main.methodes.randInt(0, 1000) == 1){
 			Asteroids.add(new Asteroid(Main.methodes.randInt(0, Main.width), Main.methodes.randInt(0, 0), 0, null, 200, Main.methodes.randInt(0, 9), Main.methodes.randInt(0, 360)));
 		}
 	}

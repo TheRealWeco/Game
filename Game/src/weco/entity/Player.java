@@ -114,6 +114,10 @@ public class Player {
 		}
 		
 		
+		if(hp <= 0 && !isDead && !playDieAnimation){
+			kill();
+		}
+		
 		
 		if(Shots.size() > 0){
   			ArrayList bullets = getShots();

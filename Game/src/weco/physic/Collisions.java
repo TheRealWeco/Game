@@ -53,12 +53,10 @@ public class Collisions {
 			if(!asteroid.isDead){
 				if(playerBounds.intersects(asteroid.getBounding())){
 					
-					
-					System.out.println("coll");
-					
+					player.damage(asteroid.hp/2);
+
 					asteroid.hp = 0;
 					
-					player.damage(asteroid.hp/2);
 				}
 			}
 		}
